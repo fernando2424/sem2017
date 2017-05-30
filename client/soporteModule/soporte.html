@@ -1,0 +1,21 @@
+<template name ="soporteTemplate">
+	{{#if currentUser}}
+		{{#if isInRole 'soporte' 'admin'}}
+	      {{>templateSupport}}
+	    {{else}}
+	      {{>templateClient}}
+	    {{/if}}  
+	{{else}}
+	<div class="row">
+		<div class="col s12">
+			<div class="card-panel teal">
+				<span class="white-text">
+				señor ususairo usted no esta autorizado para ver esta pagina
+					
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	{{/if}}		
+</template>
