@@ -1,13 +1,24 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
+      Meteor.publishComposite("getConnections",{
+            find(){
+                  return CONNECT.find({stade:true});
+            },
+            children:[{
+                  find(connect){
+                        return Meteor.users.find({_id:connect.idUs});
+                  }
+            }]
+
+      });
       Meteor.methods({
-      	"checkConnection" : function (id){
+      	"checkConnection": function(id){
       	 var result	= CONNECT.find({idUs:id,stade:true}).fetch();
       	 if(result.lenght>0){
       	 	return {value:true,id:result[0]._id};
       	 }
-      	 return {value:true};
+      	 return {value:false};
       	},
       	"createConnection": function(idus){
                   console.log(idus);
