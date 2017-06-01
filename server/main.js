@@ -1,6 +1,33 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
+      Meteor.publishComposite("getMSN",function(idUs,idMe){
+            return {
+                  find(){
+                        return CHAT.find(
+                              {$or:
+                                    [
+                                          {idSource:idMe,idDestination:idUs},
+                                          {idSource:idUs,idDestination:idMe}
+                                          ]});
+                  },
+                  children:[
+                        {
+                              find(chat){
+                                    return Meteor.users.find({_id:chat.idSource});
+                              }
+                              
+                        },
+                        {
+                              find(chat){
+                                    return Meteor.users.find({_id:chat.idDestination});
+                                    
+                              }
+                        }
+                  ]
+            }
+      });
+
       Meteor.publishComposite("getConnections",{
             find(){
                   return CONNECT.find({stade:true});

@@ -54,4 +54,6 @@ h5 {
 a.button-collapse i {
     color: #000;
 }
-
+#users_list{
+  cursor: pointer;
+}
