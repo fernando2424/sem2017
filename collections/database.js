@@ -30,3 +30,25 @@ var connectSchema = new SimpleSchema({
   }
 });
 CONNECT.attachSchema(connectSchema);
+CURSO = new Mongo.Collection("curso");
+var cursoSchema=new SimpleSchema({
+        nombre:{
+            type:String
+        },
+        date:{
+            type:Date
+        },
+        fechaInicio:{
+            type:Date
+        },
+        fechaFin:{
+            type:Date
+        },
+        descripcion:{
+            type:String
+        },
+        idUs: {
+            type:String
+        }
+});
+CURSO.attachSchema(cursoSchema);

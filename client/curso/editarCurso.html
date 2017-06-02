@@ -1,0 +1,27 @@
+<template name="editarCursoForm">
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <h4>Editar curso</h4>
+            <form action="" method="post">
+                <label for="">Nombre</label>
+                <input type="text" id="editarCursoNombre" name="nombre"/>
+                <br/>
+                <label for="">Descripción</label>
+                <textarea rows="10" cols="50" id="editarCursoDescripcion" name="descripcion"></textarea>
+                <br/>
+                <label for="">Fecha Inicio</label>
+                <input type="date" id="editarCursoFechaInicio" name="fechaInicio"/>
+                <label for="">Fecha Fin</label>
+                <input type="date" id="editarCursoFechaFin" name="fechaFin"/>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+
+                    <button class="modal-action modal-close btn waves-effect waves-light" type="button" id="btnEditarCurso" name="btnEditarCurso">Guardar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <input type="hidden" id="editarCursoId"/>
+            </form>
+        </div>
+    </div>
+</template>

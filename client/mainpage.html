@@ -8,7 +8,8 @@
       
         <ul class="right hide-on-med-and-down">
             {{#if currentUser}}
-          <li><a href="form1">CURSOS</a></li>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/cursos">Cursos</a></li>
           <li><a href="#"></a></li>
           <li><a href="/soporte">Soporte online</a></li>
            {{/if}}
@@ -39,6 +40,9 @@
 
   <div class="container">
    {{>Template.dynamic template=content}}
+  </div>
+  <div class="container">
+   {{>Template.dynamic template=listarCursos}}
   </div>
 
 

@@ -55,7 +55,32 @@ Meteor.startup(() => {
             "disconnection": function(id){
                   CONNECT.update(id,{$set:{stade:false,disconnectionDate:new Date()}});
                   return true;
+            },
+            "addCurso": function (msnObj) {
+                  console.log("Enter addCurso");
+                  CURSO.insert(msnObj);
+                  return true;
+            },
+            "updateCurso": function(Obj){
+                  console.log(Obj._id);
+                  CURSO.update(Obj._id,{$set:{nombre:Obj.nombre,fechaInicio:Obj.fechaInicio,fechaFin:Obj.fechaFin,descripcion:Obj.descripcion}});
+                  return true;
             }
-
       });
+
+});
+Meteor.publishComposite("getCurso2",{
+    find()
+    {
+    return CURSO.find();
+    },
+    children:[{
+    find(cursos){
+        return Meteor.users.find({_id: cursos.idUs});
+    }
+    }]
+});
+
+Meteor.publish('getCursos', function () {
+    return CURSO.find();
 });

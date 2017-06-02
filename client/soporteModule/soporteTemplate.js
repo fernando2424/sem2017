@@ -1,3 +1,5 @@
+
+
 Template.templateSupport.helpers({
    ready: function(){
    	 return FlowRouter.subsReady("getConnections");

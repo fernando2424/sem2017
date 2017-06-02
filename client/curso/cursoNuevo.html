@@ -1,0 +1,27 @@
+<template name="nuevoCurso">
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Crear curso</h4>
+            <form action="" method="post">
+                <label for="">Nombre</label>
+                <input type="text" id="nombre" name="nombre"/>
+                <br/>
+                <label for="">Descripción</label>
+                <textarea rows="4" cols="50" id="descripcion" name="descripcion"></textarea>
+                <br/>
+                <label for="">Fecha Inicio</label>
+                <input type="date" id="fechaInicio" name="fechaInicio"/>
+                <br/>
+                <label for="">Fecha Fin</label>
+                <input type="date" id="fechaFin" name="fechaFin"/>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+
+                    <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="submit">Guardar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
