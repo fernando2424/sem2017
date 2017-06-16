@@ -1,0 +1,51 @@
+<template name="respuestaForm">
+    <!--
+    <div id="respuestaModal" class="modal bottom-sheet" >
+        <div class="modal-content">
+            <div id="editor_texto"></div>
+            <input type="hidden" id="hiddenPreguntaId"/>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="btnGuardarRespuesta" class="modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
+        </div>
+    </div>
+        <button class="waves-effect waves-light btn respuestaModal" data-target="respuestaModal">Responder</button>
+    -->
+
+<div class="container">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <label for=""><h1>{{getMaterial.nombre}}</h1></label>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <div id="editor_texto"></div>
+                    <input type="hidden" id="hiddenPreguntaId"/>
+                </div>
+                <div class="input-field col s6">
+                    <button id="btnGuardarRespuesta" class="btn-floating btn-large waves-effect waves-light red" type="button" name="action">
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            {{#each respuestas}}
+            <div class="card-panel box-respuesta">
+                                <span>
+                                    {{user_list.username}}
+                                </span>
+                                <span>
+                                    {{{respuesta}}}
+                                </span>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+</template>

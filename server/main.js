@@ -1,73 +1,41 @@
-import { Meteor } from 'meteor/meteor';
-
-Meteor.startup(() => {
-      Meteor.publishComposite("getMSN",function(idUs,idMe){
-            return {
-                  find(){
-                        return CHAT.find(
-                              {$or:
-                                    [
-                                          {idSource:idMe,idDestination:idUs},
-                                          {idSource:idUs,idDestination:idMe}
-                                          ]});
-                  },
-                  children:[
-                        {
-                              find(chat){
-                                    return Meteor.users.find({_id:chat.idSource});
-                              }
-                              
-                        },
-                        {
-                              find(chat){
-                                    return Meteor.users.find({_id:chat.idDestination});
-                                    
-                              }
-                        }
-                  ]
-            }
-      });
-
-      Meteor.publishComposite("getConnections",{
-            find(){
-                  return CONNECT.find({stade:true});
-            },
-            children:[{
-                  find(connect){
-                        return Meteor.users.find({_id:connect.idUs});
-                  }
-            }]
-
-      });
-      Meteor.methods({
-      	"checkConnection": function(id){
-      	 var result	= CONNECT.find({idUs:id,stade:true}).fetch();
-      	 if(result.lenght>0){
-      	 	return {value:true,id:result[0]._id};
-      	 }
-      	 return {value:false};
-      	},
-      	"createConnection": function(idus){
-                  console.log(idus);
-                  var id = CONNECT.insert({idUs:idus,connectionDate:new Date(),disconnectionDate:new Date(),stade:true});
-                  return id;
-            },
-            "disconnection": function(id){
-                  CONNECT.update(id,{$set:{stade:false,disconnectionDate:new Date()}});
-                  return true;
-            },
-            "addCurso": function (msnObj) {
-                  console.log("Enter addCurso");
-                  CURSO.insert(msnObj);
-                  return true;
-            },
-            "updateCurso": function(Obj){
-                  console.log(Obj._id);
-                  CURSO.update(Obj._id,{$set:{nombre:Obj.nombre,fechaInicio:Obj.fechaInicio,fechaFin:Obj.fechaFin,descripcion:Obj.descripcion}});
-                  return true;
-            }
-      });
-
+import {Meteor} from 'meteor/meteor';
+Meteor.methods({
+    "addCurso": function (msnObj) {
+        console.log("Enter addCurso2");
+        CURSO.insert(msnObj);
+        return true;
+    },
+    "addMaterial": function (msnObj) {
+            console.log("Dentro en addMaterial");
+            MATERIAL.insert(msnObj);
+            return true;
+    },
+    "addChatMaterial": function (msnObj) {
+        console.log("Dentro de addChatMaterial");
+        CHAT.insert(msnObj);
+        return true;
+    },
+    "addPregunta": function (msnObj) {
+        console.log("Dentro de addPregunta");
+        PREGUNTA.insert(msnObj);
+        return true;
+    },
+    "addRespuesta": function (msnObj) {
+        console.log("Dentro de addRespuesta");
+        RESPUESTA.insert(msnObj);
+        return true;
+    },
+    "updateCurso": function(Obj){
+        console.log(Obj._id);
+        CURSO.update(Obj._id,{$set:{nombre:Obj.nombre,fechaInicio:Obj.fechaInicio,fechaFin:Obj.fechaFin,descripcion:Obj.descripcion}});
+        return true;
+    }
+});
+Meteor.publish("getFiles",function(){
+    return FILES.find().cursor;
+});
+Meteor.publish("getMateriales",function(){
+    return MATERIAL.find();
 });
 Meteor.publishComposite("getCurso2",{
     find()
@@ -80,7 +48,80 @@ Meteor.publishComposite("getCurso2",{
     }
     }]
 });
+Meteor.publishComposite("getPreguntas",{
+    find()
+{
+    return PREGUNTA.find();
+},
+children:[{
+    find(preguntas){
+    return Meteor.users.find({_id: preguntas.idUs});
+}
+}]
+});
+Meteor.publishComposite("getChatMaterial",{
+    find()
+    {
+        return CHAT.find();
+    },
+    children:[{
+        find(materiales){
+            return Meteor.users.find({_id: materiales.idUs});
+        }
+    }],
+    children:[{
+        find(materiales){
+            return MATERIAL.find({_id: materiales.idMaterial});
+        }
+    }]
+});
+
+Meteor.publishComposite("getMateriales",{
+    find()
+    {
+        return MATERIAL.find();
+    },
+children:[{
+    find(materiales){
+    return Meteor.users.find({_id: materiales.idUs});
+}
+}]
+});
+Meteor.publishComposite("getRespuestas",{
+    find()
+    {
+        return RESPUESTA.find();
+    },
+    children:[{
+    find(respuestas)
+        {
+            return Meteor.users.find({_id: respuestas.idUs});
+        }
+    }]
+});
 
 Meteor.publish('getCursos', function () {
     return CURSO.find();
+});
+Meteor.publish('getUsuarios', function () {
+    return Meteor.users.find();
+});
+ServiceConfiguration.configurations.remove({
+    service: "facebook"
+});
+
+ServiceConfiguration.configurations.insert({
+    service: "facebook",
+    appId: '235686586918653',
+    secret: '2689108adceb9d84aaeaebaab5b646d5'
+});
+Accounts.onCreateUser(function (options, user) {
+
+    if (!user.services.facebook) {
+        return user;
+    }
+    user.username = user.services.facebook.name;
+    user.emails = [{address: user.services.facebook.email}];
+
+    return user;
 });

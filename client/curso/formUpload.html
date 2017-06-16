@@ -1,0 +1,19 @@
+<template name="formUpload">
+    <div id="modalFormUpload" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>seleccionar archivo</p>
+            {{#if fileSend}}
+              <b>La imagen se esta enviando</b>
+              {{progress.get}}%
+            {{else}}
+            <input type="file" id="fileImages"/>
+             <img src="{{imagen.link}}" alt="IMAGEN" width="400"/>
+            <video src="{{imagen.link}}" controls autoplay >HTML5 Video is required for this example</video>
+            {{/if}}
+        </div>
+        <div class="modal-footer">
+            <input type="button" value="Enviar" id="sendbtn"/>
+        </div>
+    </div>
+</template>

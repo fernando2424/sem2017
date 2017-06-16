@@ -1,3 +1,16 @@
+//Suscribirse a getFiles
+manager=new SubsManager();
+Template.formUpload.onCreated(function(){
+    self=this;
+    self.upload=new ReactiveVar(false);
+    self.readyFiles= new ReactiveVar(false);
+    self.autorun(function(){
+        var handler=manager.subscribe("getFiles");
+        self.readyFiles.set(handler.ready());
+    });
+});
+////////////////////////////////////////////////
+
 Template.cursoForm.events(
     {
         "submit form":function(){
@@ -5,12 +18,16 @@ Template.cursoForm.events(
             var _descripcion=$("#descripcion").val();
             var _fechaInicio=$("#fechaInicio").val();
             var _fechaFin=$("#fechaFin").val();
+            var _idImagen=$("#idImagen").val();
+            console.log("Id de la imagen:");
+            console.log(_idImagen);
             obj ={
                 nombre: _nombre,
                 descripcion: _descripcion,
                 fechaInicio:_fechaInicio,
                 fechaFin:_fechaFin,
                 date: new Date(),
+                idImagen:_idImagen,
                 idUs:Meteor.userId()
             }
 
@@ -45,6 +62,10 @@ Template.cursoForm.helpers({
     },
     permisoCurso:function(idUs){
         return Meteor.userId() === idUs;
+    },
+    "queryParams": function () {
+        console.log(FlowRouter.current().route._params.keys.postId);
+        return FlowRouter.current().route._params.keys.postId.replace(/['"]+/g, '');
     }
 });
 Template.itemsCursos.helpers({
@@ -56,9 +77,8 @@ Template.itemsCursos.helpers({
     },
     sinEspacio:function(texto){
         return texto.trim();
+    },
+    imagen:function(idImagen){
+        return FILES.findOne({_id:idImagen}).link();
     }
-});
-Template.cursoForm.onRendered(function(){
-    $(".modal").modal();
-    $("#modal2").modal();
 });

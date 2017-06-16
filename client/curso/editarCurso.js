@@ -21,6 +21,3 @@ Template.editarCursoForm.events(
         }
     }
 );
-Template.editarCursoForm.onRendered(function(){
-    $("#modal2").modal();
-});
