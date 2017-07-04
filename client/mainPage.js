@@ -1,7 +1,6 @@
 Template.mainPage.onRendered(function(){
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
-    $(".panelForm").css("opacity",0);
 });
 //////////////////
 Template.mainPage.helpers({

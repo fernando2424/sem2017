@@ -9,8 +9,7 @@ Template.menu.events({
         Meteor.logout();
     },
     "click #login":function(e){
-    	$(".panelForm").css("opacity",1);
-    	$(".panelForm").css("z-index",100);
-    	
+        $(".panelForm").css("opacity",1);
+        $(".panelForm").css("z-index",100);
     }
 });

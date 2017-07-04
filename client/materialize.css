@@ -42,10 +42,6 @@ input, textarea{
     height:300px;
     overflow: scroll;
 }
-.scroll
-{
-    overflow: scroll;   
-}
 .panelForm{
     background: #fff;
     color:000;
@@ -60,4 +56,22 @@ input, textarea{
     opacity: 0;
     box-shadow: 0px 3px 2px #333;
 }
-
+.panelFormModal{
+    background: #fff;
+    color:000;
+    position: fixed;
+    top: 300px;
+    left: 0vw;
+    width: 100%;
+    /*height: auto;*/
+    height: 50%;
+    transition: all .5s;
+    z-index: -100;
+    padding: 10px;
+    opacity: 0;
+    box-shadow: 0px 3px 2px #333;
+    overflow: scroll;
+    border-radius: 15px;
+    border-style: dotted;
+    border-color:#26a69a;
+}
