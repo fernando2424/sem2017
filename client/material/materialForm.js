@@ -9,12 +9,10 @@ Template.materialForm.onCreated(function(){
         var handler=manager.subscribe("getFiles");
         var handler2=manager.subscribe("getMateriales");
         var handler3=manager.subscribe("getPreguntas");
-        var handler4=manager.subscribe("getCursos");
 
         self.readyFiles.set(handler.ready());
         self.readyFiles.set(handler2.ready());
         self.readyFiles.set(handler3.ready());
-        self.readyFiles.set(handler4.ready());
     });
 });
 Template.materialForm.onRendered(function(){
@@ -23,22 +21,19 @@ Template.materialForm.onRendered(function(){
                 placeholder: 'Responder pregunta'
             });
         });
-        $('.respuestaModal2').leanModal();
+        //$('.respuestaModal').leanModal();
     }
 );
 ////////////////////////////////////////////////
 Template.materialForm.helpers({
     materiales:function(){
         console.log(FlowRouter.current().params.cursoId);
-        return MATERIAL.find({idCurso:FlowRouter.current().params.cursoId},{sort: {date: -1}});
+        return MATERIAL.find({idCurso:FlowRouter.current().params.cursoId});
     },
     preguntas:function(){
         console.log(FlowRouter.current().params.cursoId);
-        return PREGUNTA.find({idCurso:FlowRouter.current().params.cursoId},{sort: {date: -1}});
-    },
-    curso:function(){
-        return CURSO.findOne({_id:FlowRouter.current().params.cursoId});
-    },
+        return PREGUNTA.find({idCurso:FlowRouter.current().params.cursoId});
+    }
 });
 Template.materialForm.events({
     "click #btnGuardarRespuesta":function(e){

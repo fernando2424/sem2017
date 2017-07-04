@@ -1,13 +1,3 @@
-manager=new SubsManager();
-Template.formUpload.onCreated(function(){
-    self=this;
-    self.upload=new ReactiveVar(false);
-    self.readyFiles= new ReactiveVar(false);
-    self.autorun(function(){
-        var handler=manager.subscribe("getFiles");
-        self.readyFiles.set(handler.ready());
-    });
-});
 Template.listarCursos.helpers({
     ready: function(){
         return FlowRouter.subsReady("getCursos");
@@ -23,8 +13,5 @@ Template.listarCursos.helpers({
     },
     formatoFecha:function(fecha){
         return moment(fecha).format('YYYY-MM-DD');
-    },
-    imagen:function(idImagen){
-        return FILES.findOne({_id:idImagen}).link();
     }
 });

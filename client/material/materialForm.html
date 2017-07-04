@@ -1,23 +1,17 @@
 <template name="materialForm">
     <div class="container">
         <input type="hidden" id="idCurso" name="idCurso" value="{{params.cursoId}}"/>
-
-        <div class="row">
-            <div class="col s12">
-                <label for=""><h1>{{curso.nombre}}</h1></label>
-            </div>
+        <div class="section">
+            <button class="waves-effect waves-light btn modalFormMaterial" data-target="modalFormMaterial">Agregar material</button>
+            {{>nuevoMaterial}}
         </div>
         <div class="row">
             <div class="col s6 m6 div-scroll">
-                <div class="section">
-                    <button class="waves-effect waves-light btn modalFormMaterial" data-target="modalFormMaterial">Agregar material</button>
-                    {{>nuevoMaterial}}
-                </div>
                 {{#each materiales}}
                     <h2 class="header">{{nombre}}</h2>
                     <div class="card horizontal">
                         <div class="card-image">
-                            <video class="responsive-video" controls="controls">
+                            <video height="200" width="300" controls="controls">
                                 <source src="{{rutaVideo}}?play=true" type="{{videoTipo}}" />
                             </video>
                         </div>
@@ -33,23 +27,12 @@
                     </div>
                 {{/each}}
             </div>
+            {{>preguntasForm}}
+
+            <br><br>
             <div class="col s6 m6 div-scroll">
-                {{>preguntasForm}}
-
-
-                {{#each preguntas}}
-                <div class="card horizontal">
-                    <div class="card-stacked">
-                        <div class="card-action">
-                            <h2 class="header">{{pregunta}}</h2>
-                            <a href="/respuesta/cursos/{{_id}}" id="{{_id}}" class="" data-target="respuestaModal">Responder</a>
-
-                            <!--<button class="waves-effect waves-light btn btnResponder respuestaModal2" data-target="respuestaModal2">Responder3</button>-->
-                        </div>
-                    </div>
-                </div>
-                {{/each}}
-                <div id="respuestaModal2" class="modal" >
+                {{>respuestaForm}}
+                <div id="respuestaModal" class="modal" >
                     <div class="modal-content">
                         <div id="editor_texto"></div>
                         <input type="hidden" id="hiddenPreguntaId"/>
@@ -61,4 +44,5 @@
             </div>
         </div>
     </div>
+    {{>mainModuleRespuesta}}
 </template>

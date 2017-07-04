@@ -10,7 +10,6 @@ Template.registerForm.onCreated(function(){
         self.readyFiles.set(handler.ready());
     });
 });
-
 Template.registerForm.events({
     "submit form": function(e){
        var user = {
@@ -38,8 +37,8 @@ Template.registerForm.events({
                Meteor.loginWithPassword(user.username,user.password);
            }
         });
-        $(".panelForm").css("z-index",-100);
         $(".panelForm").css("opacity",0);
+        $(".panelForm").css("z-index",-100);
         return false;
     },
     "click #return":function(){
@@ -75,9 +74,8 @@ Template.registerForm.events({
     }
 });
 Template.registerForm.onRendered(function(){
-  $("select").material_select();
+  $('select').material_select();
 });
-
 Template.registerForm.helpers({
     fileSend:function(){
         return Template.instance().upload.get();
@@ -86,4 +84,3 @@ Template.registerForm.helpers({
         return FILES.findOne({_id:IDIMAGEN});
     }
 });
-

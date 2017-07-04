@@ -1,3 +1,11 @@
+Template.respuestaForm.onRendered(function(){
+        $(document).ready(function() {
+            $('#editor_texto').summernote({
+                placeholder: 'Responder pregunta'
+            });
+        });
+    }
+);
 //Suscribirse a getFiles
 manager=new SubsManager();
 Template.respuestaForm.onCreated(function(){
@@ -5,21 +13,10 @@ Template.respuestaForm.onCreated(function(){
     self.upload=new ReactiveVar(false);
     self.readyFiles= new ReactiveVar(false);
     self.autorun(function(){
-        var handler2=manager.subscribe("getPreguntas");
         var handler3=manager.subscribe("getRespuestas");
-        self.readyFiles.set(handler2.ready());
         self.readyFiles.set(handler3.ready());
     });
 });
-Template.respuestaForm.onRendered(function(){
-        $(document).ready(function() {
-            $('#editor_texto').summernote({
-                placeholder: 'Responder pregunta'
-            });
-        });
-        $('.respuestaModal').leanModal();
-    }
-);
 Template.respuestaForm.events({
     "click #btnGuardarRespuesta":function(e){
         var _respuesta=$('#editor_texto').summernote('code');
@@ -49,8 +46,5 @@ Template.respuestaForm.helpers({
     },
     avatar_usuario:function(){
         return Accounts.user().profile.rutaAvatar;
-    },
-    pregunta:function(){
-        return PREGUNTA.findOne({_id:FlowRouter.current().params.preguntaId});
     }
 });
