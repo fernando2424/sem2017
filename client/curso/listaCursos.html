@@ -1,0 +1,26 @@
+<template name="listarCursos">
+    <div class="container">
+        <div class="section">
+            {{#each get_cursos}}
+
+                    <div class="row">
+                        <div class="col s12 m6">
+                           <label ><h1 class="red-text">Curso: {{ nombre }}</h1></label> 
+                          <div class="card">
+                            <div class="card-image">
+                              <img src="{{imagen idImagen}}">
+                              <span class="card-title"></span>
+                            </div>
+                            <div class="card-content">
+                                <textarea id="textarea1" class="materialize-textarea" readonly>{{ descripcion }}</textarea>
+                            </div>
+                            <label><h5>Fecha de inicio del curso: {{ formatoFecha fechaInicio }}</h5></label>
+                          </div>
+                        </div>
+                    </div>
+            {{/each}}
+        </div>
+    </div>
+</template>
+ 
+                

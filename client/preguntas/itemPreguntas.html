@@ -1,0 +1,26 @@
+<template name="itemPreguntas">
+    <div id="respuestaModal2" class="modal bottom-sheet" >
+        <div class="modal-content">
+            <div id="editor_texto"></div>
+            <input type="hidden" id="hiddenPreguntaId"/>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" id="btnGuardarRespuesta" class="modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
+        </div>
+    </div>
+    {{#each preguntas}}
+    <h2 class="header">{{pregunta}}</h2>
+    <div class="card horizontal">
+        <div class="card-stacked">
+            <div class="card-action">
+                <!--<a href="#" id="{{_id}}" class="waves-effect waves-light btn btnResponder respuestaModal" data-target="respuestaModal">Responder</a>-->
+                <button class="waves-effect waves-light btn btnResponder respuestaModal2" data-target="respuestaModal2">Responder3</button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    <script>
+        $('.respuestaModal2').leanModal();
+        console.log("dentro de itempreguntas");
+    </script>
+</template>

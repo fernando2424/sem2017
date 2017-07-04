@@ -1,0 +1,31 @@
+<template name="menu">
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo"></a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    {{#if currentUser }}
+
+                        <a href="" id="logout">Loggout {{username}}</a>
+                    {{else }}
+                    <a href="" id="login">Login</a>
+                    {{/if}}
+                </li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/cursos">Cursos</a></li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/">Inicio</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/cursos">Cursos</a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="/">Inicio</a></li>
+            </ul>
+
+        </div>
+    </nav>
+    {{>mainModuleLoggin}}
+</template>

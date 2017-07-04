@@ -1,0 +1,41 @@
+<template name="chatMaterialForm">
+    <div class="container">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <label for=""><h1>{{getMaterial.nombre}}</h1></label>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="mensajeChat" type="text" class="validate">
+                        <label for="icon_prefix">Comentar</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <button class="btn-floating btn-large waves-effect waves-light red" type="submit" name="action">
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        {{#each getChatMaterial}}
+                            <div class="card-panel teal">
+                                <span class="white-text">
+                                    {{user_list.username}}:
+                                </span>
+                                <span class="white-text">
+                                    {{mensaje}}
+                                </span>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

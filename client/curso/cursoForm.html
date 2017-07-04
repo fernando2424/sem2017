@@ -1,0 +1,66 @@
+<template name="itemsCursos">
+     <div class="row">
+        <div class="col s12 m6">
+           <label ><h1 class="red-text">Curso: {{ nombre }}</h1></label> 
+          <div class="card">
+            <div class="card-image" >
+              <img src="{{imagen idImagen}}">
+              <span class="card-title"></span>
+              <!--
+              {{# if permisoCurso idUs}}
+                <a class="editarCurso btn-floating halfway-fab waves-effect waves-light red modal-trigger2" data-target="modal2" id="{{_id}}">
+                    <i class="material-icons">
+                        edit
+                    </i>
+                </a>
+              {{/if}}-->
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href="/cursos/{{_id}}">
+                    <i class="material-icons">
+                        visibility
+                    </i>
+              </a>
+            </div>
+            <div class="card-content">
+                <textarea id="textarea1" class="materialize-textarea" readonly>{{ descripcion }}</textarea>
+            </div>
+            <label><h5>Fecha de inicio del curso: {{ formatoFecha fechaInicio }}</h5></label>
+          </div>
+        </div>
+    </div>
+    <script>
+        
+        $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal();
+            $('.modal-trigger2').leanModal();
+        });
+        
+    </script>
+</template>
+<template name="cursoForm">
+    <div class="container">
+        <div class="section">
+
+            <button class="waves-effect waves-light btn modal-trigger" data-target="modal1">Crear curso</button>
+            <!--{{>registerForm}}-->
+            {{>nuevoCurso}}
+            {{# if ready}}
+            {{#each get_cursos}}
+            {{>itemsCursos username=user_list.username nombre=nombre descripcion=descripcion idUs=idUs _id=_id fechaInicio=fechaInicio fechaFin=fechaFin idImagen=idImagen}}
+            {{/each}}
+            {{>editarCursoForm}}
+            {{else}}
+            Cargando...
+            {{/if}}
+            <script>
+            
+                $(document).ready(function(){
+                    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+                    $('.modal-trigger').leanModal();
+                    $('.modal-trigger2').leanModal();
+                });
+                
+            </script>
+        </div>
+    </div>
+</template>

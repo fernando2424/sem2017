@@ -1,22 +1,41 @@
 <template name="registerForm">
-
-	<form action="" method="POST">
-            <div class="row">
+	<!--<form action="">
+        <label for="">Nick</label>
+        <input type="text" name="username"/>
+        <br/>
+        <label for="">Email</label>
+        <input type="text" name="email"/>
+        <br/>
+        <label for="">Password</label>
+        <input type="password" name="password"/>
+        <label for="">Dirección</label>
+        <input type="text" name="direccion"/>
+        <input type="submit"/>
+    </form>
+    -->
+      <form action="" method="POST">
+    		<div class="row">
+				<div class="col s11">
+				</div>
+				<div class="col s1">
+					<a href="#" id="close">X</a>
+				</div>
+			</div>
+            <!--<div class="row">
                <div class="col s11">
                    <legend>Register</legend>
                </div>
                <div class="col s1">
                   <a href="" id="close">x</a>
                </div>
-            </div>
+            </div>-->
             <div class="row">
                <div class ="col s6">
-
                     <div class="input-field"> 
                       <div class="form-group">
                         <label class="control-label" for="">Username</label>
                         <span class="help-block"></span>
-                        <input type="text" class="form-control" name="username" id="" placeholder="Nombre de usuario">
+                        <input type="text" class="form-control" name="username" id="" >
                       </div>
                     </div>
                </div>
@@ -25,18 +44,18 @@
                     <div class="form-group">
                       <label class="control-label" for="">Email</label>
                       <span class="help-block"></span>
-                      <input type="text" class="form-control" id="" placeholder="Email" name="email">
+                      <input type="text" class="form-control" id="" name="email">
                     </div>
                   </div>
                </div>
-
+            </div>
              <div class="row">
              	 <div class="col s6">
              	 	 <div class="input-field"> 
                       <div class="form-group">
                         <label class="control-label" for="">Password</label>
                         <span class="help-block"></span>
-                        <input type="password" class="form-control" name="password" placeholder="password">
+                        <input type="password" class="form-control" name="password">
                       </div>
                     </div>
               	 </div>
@@ -46,7 +65,7 @@
                       <div class="form-group">
                         <label class="control-label" for=""> Re Password</label>
                         <span class="help-block"></span>
-                        <input type="password" class="form-control" name="repassword" id="" placeholder="Re.password">
+                        <input type="password" class="form-control" name="repassword" id="">
                       </div>
                     </div>
               	 </div>
@@ -54,22 +73,48 @@
              </div> 
              <div class="row">
              	<div class ="col s12">
-
                     <div class="input-field"> 
                       <div class="form-group">
                         <label class="control-label" for="">Nombre</label>
                         <span class="help-block"></span>
-                        <input type="text" class="form-control" name="nombre" id="" placeholder="Nombre">
+                        <input type="text" class="form-control" name="nombre" id="">
                       </div>
                     </div>
-               </div>
+               	</div>
+               	<div class="col s12">
+               		{{#if fileSend}}
+		             <label class="control-label" for="">
+		             	Subiendo Avatar...
+		             </label>
+		            {{progress.get}}%
+		            {{else}}
+		            	<div class="col s6">
+		            		<div class="file-field input-field">
+						      <div class="btn">
+						        <span>Avatar</span>
+						        <input type="file" id="fileImages">
+						      </div>
+						      <div class="file-path-wrapper">
+						        <input class="file-path validate" type="text">
+						      </div>
+						    </div>
+		            	</div>
+		            	<div class="col s6">
+		            		<img src="{{imagen.link}}" alt="IMAGEN" width="80"/>
+		            	</div>
+		                <!--<input type="file" id="fileImages" />-->
+		                <input type="hidden" name="rutaAvatar" id="rutaAvatar" value="{{imagen.link}}"/>
+		            {{/if}}
+               	</div>
+             </div>
+             <div class="row">
                 <div class ="col s6">
 
                     <div class="input-field"> 
                       <div class="form-group">
                         <label class="control-label" for="">Apellido Paterno</label>
                         <span class="help-block"></span>
-                        <input type="text" class="form-control" name="apellido_paterno" id="" placeholder="ApellidoPaterno">
+                        <input type="text" class="form-control" name="apellido_paterno" id="">
                       </div>
                     </div>
                </div>
@@ -79,46 +124,35 @@
                       <div class="form-group">
                         <label class="control-label" for="">Apelido Materno</label>
                         <span class="help-block"></span>
-                        <input type="text" class="form-control" name="apellido_materno" id="" placeholder="Apellido Materno">
+                        <input type="text" class="form-control" name="apellido_materno" id="" >
                       </div>
                     </div>
                </div>
              </div>
             <div class="row">
-
             	  <div class ="col s6">
-
 	                    <div class="input-field"> 
 	                      <div class="form-group">
-	                      
-	                        <select name="carrera">
-	                        	<option value="sistemas">Ingenieria de Sistemas</option>
-	                        	<option value="derecho">Derecho</option>
-	                        	<option value="medicina">Medicina</option>
-                            <option value="medicina">Ingeñieria civil</option>
-                            <option value="medicina">Ingeñieria Electronica</option>
+	                        <select name="carrera" >
+        	                        	<option value="sistemas">Ingenieria de Sistemas1</option>
+        	                        	<option value="derecho" >Derecho</option>
+        	                        	<option value="medicina">Medicina</option>
+                                    <option value="Ingeñieria civil">Ingenieria civil</option>
+                                    <option value="Ingenieria Electronica">Ingenieria Electronica</option>
 	                        </select>
-	                        
+
+                          
 	                      </div>
-	                    </div>
-                 </div>
-
-            </div>
-
+                      </div>  
+                </div>
             </div>
             <div class="row">
-              <div class="col s4">
-                   <button type="submit" class="btn">Crear cuenta</button>
+              <div class="col s6">
+                   <button type="submit" class="btnCrearCuenta btn">Crear cuenta</button>
               </div>
-              <div class="col s4">
-                 
-              </div>
-              <div class="col s4">
+              <div class="col s6">
                   <button type="button" id="return" class="btn">Volver login</button>
               </div>
             </div>
-             
         </form>
-
-
 </template>

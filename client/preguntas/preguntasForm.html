@@ -1,0 +1,19 @@
+<template name="preguntasForm">
+        <div id="preguntaNuevaModal" class="modal" style="height:200px;width:500px">
+            <div class="modal-content">
+                <h4>Nueva pregunta</h4>
+                <div class="row">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="pregunta" type="text" class="validate">
+                                <label for="first_name">Pregunta</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" id="btnPreguntaNueva" class="modal-action modal-close btn waves-effect waves-light" value="Enviar"/>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <button class="waves-effect waves-light btn preguntaNuevaModal" data-target="preguntaNuevaModal">Agregar pregunta</button>
+</template>
