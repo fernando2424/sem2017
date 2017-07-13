@@ -115,6 +115,7 @@ ServiceConfiguration.configurations.insert({
     appId: '235686586918653',
     secret: '2689108adceb9d84aaeaebaab5b646d5'
 });
+/*
 Accounts.onCreateUser(function (options, user) {
 
     if (!user.services.facebook) {
@@ -124,4 +125,17 @@ Accounts.onCreateUser(function (options, user) {
     user.emails = [{address: user.services.facebook.email}];
 
     return user;
+});*/
+Accounts.onCreateUser(function(options, user) {
+   // Use provided profile in options, or create an empty object
+   user.profile = options.profile || {};
+   // Assigns first and last names to the newly created user object
+   user.profile.nombre = options.firstName;
+   user.profile.lastName = options.lastName;
+   user.profile.apellido_paterno= options.apellido_paterno;
+   user.profile.apellido_materno= options.apellido_materno;
+   user.profile.carrera= options.carrera;
+   user.profile.rutaAvatar= options.rutaAvatar;
+   // Returns the user object
+   return user;
 });
