@@ -1,3 +1,11 @@
+Template.respuestaForm.onRendered(function(){
+        $(document).ready(function() {
+            $('#editor_texto').summernote({
+                placeholder: 'Responder pregunta'
+            });
+        });
+    }
+);
 //Suscribirse a getFiles
 manager=new SubsManager();
 Template.respuestaForm.onCreated(function(){
@@ -9,15 +17,6 @@ Template.respuestaForm.onCreated(function(){
         self.readyFiles.set(handler3.ready());
     });
 });
-Template.respuestaForm.onRendered(function(){
-        $(document).ready(function() {
-            $('#editor_texto').summernote({
-                placeholder: 'Responder pregunta'
-            });
-        });
-        $('.respuestaModal').leanModal();
-    }
-);
 Template.respuestaForm.events({
     "click #btnGuardarRespuesta":function(e){
         var _respuesta=$('#editor_texto').summernote('code');
@@ -45,4 +44,7 @@ Template.respuestaForm.helpers({
     user_list: function(){
         return Meteor.users.findOne({_id:this.idUs});
     },
+    avatar_usuario:function(){
+        return Accounts.user().profile.rutaAvatar;
+    }
 });
