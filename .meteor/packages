@@ -30,6 +30,10 @@ alanning:roles
 aldeed:collection2
 reywood:publish-composite
 meteorhacks:subs-manager
-momentjs:moment # Libreria para fechas
-panter:ostrio-files # Libreria para archivos
-summernote:summernote # Libreria para texto enriquesito
+momentjs:moment
+panter:ostrio-files
+summernote:summernote
+#dbarrett:dropzonejs
+tomi:upload-server
+session
+#raix:ui-dropped-event

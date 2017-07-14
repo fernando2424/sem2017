@@ -5,10 +5,24 @@
             <ul class="right hide-on-med-and-down">
                 <li>
                     {{#if currentUser }}
+                        <a href="" id="notificaciones">Notificaciones ({{total_respuestas}})</a>
+                    {{/if}}
+                </li>
+            </ul>
+             <ul class="right hide-on-med-and-down">
+                <li>
+                    {{#if currentUser }}
+                        <a href="" id="actualizar_perfil">Perfil</a>
+                    {{/if}}
+                </li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    {{#if currentUser }}
 
                         <a href="" id="logout">Loggout {{username}}</a>
                     {{else }}
-                    <a href="" id="login">Login</a>
+                        <a href="" id="login">Login</a>
                     {{/if}}
                 </li>
             </ul>

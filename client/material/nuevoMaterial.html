@@ -2,7 +2,6 @@
     <div id="modalFormMaterial" class="modal">
         <div class="modal-content">
             <h4>Nuevo material</h4>
-
             <p>seleccionar video</p>
             {{#if fileSend}}
             <b>Subiendo Video...</b>
@@ -34,4 +33,10 @@
             </div>
         </div>
     </div>
+        <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('·modalFormMaterial').leanModal();
+        });
+    </script>
 </template>

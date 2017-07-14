@@ -25,6 +25,51 @@ Meteor.methods({
         RESPUESTA.insert(msnObj);
         return true;
     },
+    "updateRespuesta": function(Obj){
+        console.log("Estas dentro de server updateRespuesta");
+        console.log(Obj);
+        RESPUESTA.update(Obj._id,{$set:{calificacion:Obj.calificacion}});
+        return true;
+    },
+    "updatePregunta": function(Obj){
+        console.log("Estas dentro de server updatePregunta");
+        console.log(Obj);
+        PREGUNTA.update(Obj._id,{$set:{calificacion:Obj.calificacion}});
+        return true;
+    },
+    "updateMaterial": function(Obj){
+        console.log("Estas dentro de server updateMaterial");
+        console.log(Obj);
+        MATERIAL.update(Obj._id,{$set:{cantidad:Obj.cantidad}});
+        return true;
+    },
+    "updateMaterialForm": function(Obj){
+        console.log("Estas dentro de server updateMaterial Form");
+        console.log(Obj);
+        MATERIAL.update(Obj._id,{$set:{nombre:Obj.nombre,date:Obj.date,descripcion:Obj.descripcion,rutaVideo:Obj.rutaVideo,tipoVideo:Obj.tipoVideo}});
+        return true;
+    },
+    "addCalificacionRespuesta": function (msnObj) {
+        console.log("Dentro de addCalificacionRespuesta");
+        CALIFICACION_RESPUESTA.insert(msnObj);
+        return true;
+    },
+    "addCalificacionPregunta": function (msnObj) {
+        console.log("Dentro de addCalificacionPregunta");
+        CALIFICACION_PREGUNTA.insert(msnObj);
+        return true;
+    },
+    "addNotifiacionRespuesta": function (msnObj) {
+        console.log("Dentro de addNotificacionResputa");
+        NOTIFICACION_RESPUESTA.insert(msnObj);
+        console.log(NOTIFICACION_RESPUESTA);
+        return true;
+    },
+    "addMaterialArchivo": function (msnObj) {
+        console.log("addMaterialArchivo");
+        MATERIAL_ARCHIVO.insert(msnObj);
+        return true;
+    },
     "updateCurso": function(Obj){
         console.log(Obj._id);
         CURSO.update(Obj._id,{$set:{nombre:Obj.nombre,fechaInicio:Obj.fechaInicio,fechaFin:Obj.fechaFin,descripcion:Obj.descripcion}});
@@ -34,8 +79,11 @@ Meteor.methods({
 Meteor.publish("getFiles",function(){
     return FILES.find().cursor;
 });
-Meteor.publish("getMateriales",function(){
-    return MATERIAL.find();
+Meteor.publish("getNotificacionRespuesta",function(){
+    return NOTIFICACION_RESPUESTA.find();
+});
+Meteor.publish("getMaterialArchivo",function(){
+    return MATERIAL_ARCHIVO.find();
 });
 Meteor.publishComposite("getCurso2",{
     find()
@@ -55,7 +103,7 @@ Meteor.publishComposite("getPreguntas",{
 },
 children:[{
     find(preguntas){
-    return Meteor.users.find({_id: preguntas.idUs});
+    return RESPUESTA.find({idPregunta: preguntas._id});
 }
 }]
 });
@@ -95,6 +143,30 @@ Meteor.publishComposite("getRespuestas",{
     children:[{
     find(respuestas)
         {
+            return PREGUNTA.find({_id: respuestas.idPregunta});
+        }
+    }]
+});
+Meteor.publishComposite("getCalificacionRespuesta",{
+    find()
+    {
+        return CALIFICACION_RESPUESTA.find();
+    },
+    children:[{
+    find(respuestas)
+        {
+            return Meteor.users.find({_id: respuestas.idUs});
+        }
+    }]
+});
+Meteor.publishComposite("getCalificacionPregunta",{
+    find()
+    {
+        return CALIFICACION_PREGUNTA.find();
+    },
+    children:[{
+    find(respuestas)
+        {
             return Meteor.users.find({_id: respuestas.idUs});
         }
     }]
@@ -130,8 +202,7 @@ Accounts.onCreateUser(function(options, user) {
    // Use provided profile in options, or create an empty object
    user.profile = options.profile || {};
    // Assigns first and last names to the newly created user object
-   user.profile.nombre = options.firstName;
-   user.profile.lastName = options.lastName;
+   user.profile.nombre = options.nombre;
    user.profile.apellido_paterno= options.apellido_paterno;
    user.profile.apellido_materno= options.apellido_materno;
    user.profile.carrera= options.carrera;
@@ -139,3 +210,19 @@ Accounts.onCreateUser(function(options, user) {
    // Returns the user object
    return user;
 });
+/*
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    UploadServer.init({
+      tmpDir: '/public/uploads',
+      uploadDir: '/public/uploads',
+      checkCreateDirectories: true,
+      processing: function()
+         {
+           $('.dz-message').remove();
+         },
+         dictDefaultMessage: '<div class="dz-message">My message to show at the start and disapear when you do stuff</div>',
+      uploadUrl: '/upload'
+    });
+  });
+}*/

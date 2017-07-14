@@ -1,3 +1,20 @@
+manager=new SubsManager();
+Template.mainPage.onCreated(function(){
+    self=this;
+    self.upload=new ReactiveVar(false);
+    self.readyFiles= new ReactiveVar(false);
+    self.autorun(function(){
+        //
+    
+        
+        var handler8=manager.subscribe("getNotificacionRespuesta");
+        self.readyFiles.set(handler8.ready());
+        
+    });
+});
+_idPregunta=new ReactiveVar();
+_idPregunta.set("");
+
 Template.mainPage.onRendered(function(){
     $('.button-collapse').sideNav();
     $('.parallax').parallax();

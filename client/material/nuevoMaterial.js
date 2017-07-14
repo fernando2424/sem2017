@@ -27,7 +27,8 @@ Template.nuevoMaterial.events({
             rutaVideo:_rutaVideo,
             tipoVideo:_tipoVideo,
             idUs:Meteor.userId(),
-            idCurso:_idCurso
+            idCurso:_idCurso,
+            cantidad:0
         }
         Meteor.call("addMaterial",obj,function(){
             console.log("Dentro");

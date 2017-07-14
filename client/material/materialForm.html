@@ -1,35 +1,38 @@
 <template name="materialForm">
     <div class="container">
+    <div class="row">
+        <div class="col s12">
+                <center><label><h1>Curso : {{nombre_curso}}</h1></label></center>
+        </div>
+    </div>
         <input type="hidden" id="idCurso" name="idCurso" value="{{params.cursoId}}"/>
-        <div class="section">
-            <button class="waves-effect waves-light btn modalFormMaterial" data-target="modalFormMaterial">Agregar material</button>
-            {{>nuevoMaterial}}
+        <div class="row">
+            <div class="col s6 m6">
+                {{#if permiso_curso}}
+                    <button class="waves-effect waves-light btn modalFormMaterial" data-target="modalFormMaterial">Agregar material</button>
+
+                      <a class="waves-effect waves-light btn red darken-1" id="materialesAntiguos">Antiguos</a>
+
+                        <a class="waves-effect waves-light btn red darken-1" id="materialesNuevos">Nuevos</a>
+                {{else}}
+                    <label><h1>Materiales</h1></label>
+                {{/if}}
+            </div>
+            <div class="col s6 m6">
+                <button class="waves-effect waves-light btn preguntaNuevaModal" data-target="preguntaNuevaModal" id="preguntaNuevaModalId">Agregar pregunta</button>
+                <a class="waves-effect waves-light btn red darken-1" id="PreguntasMejores">Mejores</a>
+                <a class="waves-effect waves-light btn red darken-1" id="PreguntasNuevas">Nuevos</a>
+            </div>
+            
         </div>
         <div class="row">
             <div class="col s6 m6 div-scroll">
+                {{>nuevoMaterial}}
                 {{#each materiales}}
-                    <h2 class="header">{{nombre}}</h2>
-                    <div class="card horizontal">
-                        <div class="card-image">
-                            <video height="200" width="300" controls="controls">
-                                <source src="{{rutaVideo}}?play=true" type="{{videoTipo}}" />
-                            </video>
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <p>{{descripcion}}</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">Archivos</a>
-                                <a href="/material/chat/{{_id}}">CHAT</a>
-                            </div>
-                        </div>
-                    </div>
+                    {{>listMaterial}}
                 {{/each}}
             </div>
             {{>preguntasForm}}
-
-            <br><br>
             <div class="col s6 m6 div-scroll">
                 {{>respuestaForm}}
                 <div id="respuestaModal" class="modal" >
@@ -43,6 +46,15 @@
                 </div>
             </div>
         </div>
+         {{>editarMaterial}}
+         {{>nuevoArchivo}}
+         {{>listArchivoMaterial}}
     </div>
     {{>mainModuleRespuesta}}
+      <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.modalFormMaterial').leanModal();
+        });
+    </script>
 </template>

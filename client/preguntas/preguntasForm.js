@@ -22,7 +22,8 @@ Template.preguntasForm.events({
             pregunta: _pregunta,
             date: new Date(),
             idCurso:FlowRouter.current().params.cursoId,
-            idUs:Meteor.userId()
+            idUs:Meteor.userId(),
+            calificacion:0
         }
         Meteor.call("addPregunta",obj,function(){
         });

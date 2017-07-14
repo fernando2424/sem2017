@@ -77,6 +77,9 @@ var materialSchema=new SimpleSchema({
     },
     idCurso: {
         type:String
+    },
+    cantidad: {
+        type:Number
     }
 });
 MATERIAL.attachSchema(materialSchema);
@@ -106,6 +109,7 @@ var archivoSchema=new SimpleSchema({
     }
 });
 ARCHIVO.attachSchema(archivoSchema);
+
 var archivoSchema=new SimpleSchema({
     nombre:{
         type:String
@@ -144,6 +148,9 @@ var preguntaSchema=new SimpleSchema({
     },
     idCurso: {
         type:String
+    },
+    calificacion:{
+        type:Number
     }
 });
 PREGUNTA.attachSchema(preguntaSchema);
@@ -162,8 +169,103 @@ var respuestaSchema=new SimpleSchema({
     idPregunta: {
         type:String
     },
-    puntaje:{
-        type:String
+    calificacion:{
+        type:Number
     }
 });
 RESPUESTA.attachSchema(respuestaSchema);
+
+CALIFICACION_RESPUESTA = new Mongo.Collection("calificacionRespuesta");
+var calificacionRespuestaSchema=new SimpleSchema({
+    idRespuesta: {
+        type:String
+    },
+    idUs: {
+        type:String
+    },
+    date:{
+        type:Date
+    },
+    calificacion: {
+        type:Number
+    }
+});
+CALIFICACION_RESPUESTA.attachSchema(calificacionRespuestaSchema);
+
+CALIFICACION_PREGUNTA = new Mongo.Collection("calificacionPregunta");
+var calificacionPreguntaSchema=new SimpleSchema({
+    idPregunta: {
+        type:String
+    },
+    idUs: {
+        type:String
+    },
+    date:{
+        type:Date
+    },
+    calificacion: {
+        type:Number
+    }
+});
+CALIFICACION_PREGUNTA.attachSchema(calificacionPreguntaSchema);
+
+NOTIFICACION_RESPUESTA = new Mongo.Collection("notificacionRespuesta");
+var notificacionRespuestaSchema=new SimpleSchema({
+    pregunta: {
+        type:String
+    },
+    idPregunta: {
+        type:String
+    },
+    nombreUsuarioPregunto: {
+        type:String
+    },
+    idUsuarioPregunto: {
+        type:String
+    },
+    nombreUsuarioRespondio: {
+        type:String
+    },
+    idUsuarioRespondio: {
+        type:String
+    },
+    date:{
+        type:Date
+    },
+    estado: {
+        type:Number
+    },
+    idCurso: {
+        type:String
+    },
+    rutaAvatarPregunto: {
+        type:String
+    },
+    rutaAvatarRespondio:{
+        type:String
+    }
+});
+NOTIFICACION_RESPUESTA.attachSchema(notificacionRespuestaSchema);
+
+MATERIAL_ARCHIVO = new Mongo.Collection("materialArchivo");
+var materialArchivoSchema=new SimpleSchema({
+    nombre:{
+        type:String
+    },
+    date:{
+        type:Date
+    },
+    ruta:{
+        type:String
+    },
+    tipo:{
+        type:String
+    },
+    idUs: {
+        type:String
+    },
+    idMaterial: {
+        type:String
+    }
+});
+MATERIAL_ARCHIVO.attachSchema(materialArchivoSchema);

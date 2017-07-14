@@ -10,7 +10,6 @@ Template.formUpload.onCreated(function(){
     });
 });
 ////////////////////////////////////////////////
-
 Template.cursoForm.events(
     {
         "submit form":function(){
@@ -39,7 +38,8 @@ Template.cursoForm.events(
             return false;
         },
         "click .editarCurso":function(e){
-            var obj=CURSO.findOne({_id:event.target.id}, {sort: {date: -1}});
+            console.log(e.target.id);
+            var obj=CURSO.findOne({_id:e.target.id}, {sort: {date: -1}});
             console.log("Enter editar curso");
             $("#editarCursoNombre").val(obj.nombre);
             $("#editarCursoDescripcion").val(obj.descripcion);
